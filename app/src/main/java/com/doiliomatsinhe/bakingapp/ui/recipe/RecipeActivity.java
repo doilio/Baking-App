@@ -89,6 +89,5 @@ public class RecipeActivity extends AppCompatActivity implements SwipeRefreshLay
         Intent i = new Intent(this, RecipeDetailActivity.class);
         i.putExtra(RECIPE, recipe);
         startActivity(i);
-        Toast.makeText(this, "clicked on:" + recipe.getName(), Toast.LENGTH_SHORT).show();
     }
 }
