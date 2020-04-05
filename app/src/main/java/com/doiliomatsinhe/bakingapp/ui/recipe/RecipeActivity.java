@@ -1,4 +1,4 @@
-package com.doiliomatsinhe.bakingapp.ui;
+package com.doiliomatsinhe.bakingapp.ui.recipe;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -16,6 +17,7 @@ import com.doiliomatsinhe.bakingapp.adapter.RecipeAdapter;
 import com.doiliomatsinhe.bakingapp.data.BakingRepository;
 import com.doiliomatsinhe.bakingapp.databinding.ActivityRecipeBinding;
 import com.doiliomatsinhe.bakingapp.model.Recipe;
+import com.doiliomatsinhe.bakingapp.ui.recipeDetail.RecipeDetailActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +27,7 @@ public class RecipeActivity extends AppCompatActivity implements SwipeRefreshLay
     private ActivityRecipeBinding binding;
     private RecipeViewModel viewModel;
     private RecipeAdapter adapter;
+    public static final String RECIPE = "recipe";
 
     private List<Recipe> recipeList = new ArrayList<>();
     private static final String TAG = RecipeActivity.class.getSimpleName();
@@ -50,10 +53,11 @@ public class RecipeActivity extends AppCompatActivity implements SwipeRefreshLay
 
                 adapter.setRecipeList(recipes);
                 recipeList = recipes;
+                binding.swipeRefreshRecipe.setRefreshing(false);
             }
         });
 
-        binding.swipeRefreshRecipe.setRefreshing(false);
+
     }
 
     private void initComponents() {
@@ -82,6 +86,9 @@ public class RecipeActivity extends AppCompatActivity implements SwipeRefreshLay
     @Override
     public void onRecipeItemClick(int position) {
         Recipe recipe = recipeList.get(position);
+        Intent i = new Intent(this, RecipeDetailActivity.class);
+        i.putExtra(RECIPE, recipe);
+        startActivity(i);
         Toast.makeText(this, "clicked on:" + recipe.getName(), Toast.LENGTH_SHORT).show();
     }
 }

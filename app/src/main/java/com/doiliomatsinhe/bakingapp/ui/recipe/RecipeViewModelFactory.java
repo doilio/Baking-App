@@ -1,10 +1,11 @@
-package com.doiliomatsinhe.bakingapp.ui;
+package com.doiliomatsinhe.bakingapp.ui.recipe;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.doiliomatsinhe.bakingapp.data.BakingRepository;
+import com.doiliomatsinhe.bakingapp.ui.recipe.RecipeViewModel;
 
 public class RecipeViewModelFactory implements ViewModelProvider.Factory {
     private BakingRepository repository;

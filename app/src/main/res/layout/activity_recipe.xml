@@ -12,7 +12,7 @@
         android:layout_marginStart="4dp"
         android:layout_marginEnd="4dp"
         android:layout_height="match_parent"
-        tools:context=".ui.RecipeActivity">
+        tools:context=".ui.recipe.RecipeActivity">
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swipe_refresh_recipe"

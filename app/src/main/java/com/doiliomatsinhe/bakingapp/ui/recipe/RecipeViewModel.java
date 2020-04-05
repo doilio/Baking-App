@@ -1,4 +1,4 @@
-package com.doiliomatsinhe.bakingapp.ui;
+package com.doiliomatsinhe.bakingapp.ui.recipe;
 
 import android.util.Log;
 
@@ -7,10 +7,8 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.doiliomatsinhe.bakingapp.data.BakingRepository;
-import com.doiliomatsinhe.bakingapp.model.Ingredient;
 import com.doiliomatsinhe.bakingapp.model.Recipe;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
