@@ -32,7 +32,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="4dp"
                     android:layout_marginEnd="16dp"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     tools:text="Step 1" />
 
                 <TextView
@@ -44,7 +44,7 @@
                     android:layout_marginBottom="4dp"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     tools:text="Recipe Introduction" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
