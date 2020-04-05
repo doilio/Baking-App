@@ -77,7 +77,7 @@ public class RecipeDetailActivity extends AppCompatActivity implements StepsAdap
 
             // Setting up the ActionBar
             Objects.requireNonNull(getSupportActionBar()).setTitle(recipe.getName());
-            NAME_TEXT =recipe.getName();
+            NAME_TEXT = recipe.getName();
 
             StringBuilder stringBuilder = new StringBuilder();
             for (Ingredient ingredient : recipe.getIngredients()) {
@@ -101,12 +101,23 @@ public class RecipeDetailActivity extends AppCompatActivity implements StepsAdap
         }
     }
 
+    /**
+     * Provides a smooth experience when navigating Up.
+     * Not Querying Again
+     * @return
+     */
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return false;
+    }
+
     @Override
     public void onStepsItemClick(int position) {
         Step step = stepsList.get(position);
         Intent i = new Intent(this, StepDetailActivity.class);
         i.putExtra(STEP, step);
-        i.putExtra(NAME,NAME_TEXT);
+        i.putExtra(NAME, NAME_TEXT);
         startActivity(i);
 
     }

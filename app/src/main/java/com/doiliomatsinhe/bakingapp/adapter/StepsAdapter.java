@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.doiliomatsinhe.bakingapp.R;
 import com.doiliomatsinhe.bakingapp.databinding.StepItemBinding;
 import com.doiliomatsinhe.bakingapp.model.Step;
 
@@ -32,10 +33,14 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.ViewHolder> 
         }
 
         void bind(Step item) {
-            int stepNr = item.getId() + 1;
+            int stepNr = item.getId();
             String description = item.getShortDescription();
+            if (stepNr == 0) {
+                binding.stepNumber.setText(R.string.intro);
+            } else {
+                binding.stepNumber.setText(String.format("Step %s", stepNr));
+            }
 
-            binding.stepNumber.setText(String.format("Step %s", stepNr));
             binding.stepDescription.setText(description);
 
             binding.executePendingBindings();
