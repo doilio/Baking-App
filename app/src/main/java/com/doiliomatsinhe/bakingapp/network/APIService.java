@@ -1,6 +1,9 @@
 package com.doiliomatsinhe.bakingapp.network;
 
 import com.doiliomatsinhe.bakingapp.model.Ingredient;
+import com.doiliomatsinhe.bakingapp.model.Recipe;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -11,5 +14,5 @@ public interface APIService {
      * @return list of recipes containing ingridients and steps
      */
     @GET("baking.json")
-    Call<Ingredient> getIngredients();
+    Call<List<Recipe>> getRecipes();
 }
