@@ -46,9 +46,22 @@ dependencies {
 
     // ViewModel
     implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
+
     // LiveData
     implementation "androidx.lifecycle:lifecycle-livedata:$lifecycle_version"
+
     // Annotation processor
     annotationProcessor "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
 
+    // RecyclerView
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+
+    // CardView
+    implementation 'androidx.cardview:cardview:1.0.0'
+
+    // SwipeRefreshLayout
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
+
+    // Picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
 }
