@@ -15,8 +15,9 @@
         <LinearLayout
             android:id="@+id/container"
             android:layout_width="match_parent"
-            android:layout_height="220dp"
+            android:layout_height="match_parent"
             android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -25,20 +26,16 @@
                 android:id="@+id/video_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:visibility="visible"/>
+                android:visibility="visible" />
+
             <ImageView
                 android:id="@+id/video_error"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:contentDescription="@string/video_not_found"
                 android:src="@drawable/ic_not_found"
-                android:visibility="gone"
-                android:contentDescription="@string/video_not_found" />
+                android:visibility="gone" />
         </LinearLayout>
-
-
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
@@ -46,6 +43,7 @@
             android:layout_height="wrap_content"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
+            android:visibility="gone"
             app:cardElevation="2dp"
             app:cardPreventCornerOverlap="true"
             app:layout_constraintBottom_toTopOf="@+id/button"
@@ -62,8 +60,11 @@
                 android:padding="16dp">
 
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:text="@string/description"
-                    style="@style/label_text"/>
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/step_description"
@@ -72,7 +73,6 @@
                     android:layout_marginTop="8dp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textIsSelectable="true"
-                    style="@style/textSize"
                     tools:text="@string/step_description_text" />
 
             </LinearLayout>
@@ -80,21 +80,31 @@
 
         <Button
             android:id="@+id/button"
-            android:text="@string/previous"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="4dp"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="?attr/colorPrimaryDark"
+            android:text="@string/previous"
+            android:textColor="@android:color/white"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/button2"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            style="@style/nav_button" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/button2"
-            style="@style/nav_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="?attr/colorPrimaryDark"
             android:text="@string/next"
+            android:textColor="@android:color/white"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"

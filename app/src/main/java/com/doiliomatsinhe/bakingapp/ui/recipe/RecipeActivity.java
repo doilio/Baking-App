@@ -4,13 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.doiliomatsinhe.bakingapp.R;
 import com.doiliomatsinhe.bakingapp.adapter.RecipeAdapter;
@@ -71,8 +71,9 @@ public class RecipeActivity extends AppCompatActivity implements SwipeRefreshLay
         viewModel = new ViewModelProvider(this, factory).get(RecipeViewModel.class);
 
         // Adapter
+        int gridColumnCount = getResources().getInteger(R.integer.grid_column_count);
         adapter = new RecipeAdapter(this);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        LinearLayoutManager layoutManager = new GridLayoutManager(this,gridColumnCount);
         binding.recyclerRecipe.setLayoutManager(layoutManager);
         binding.recyclerRecipe.setHasFixedSize(true);
         binding.recyclerRecipe.setAdapter(adapter);

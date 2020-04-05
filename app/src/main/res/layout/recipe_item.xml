@@ -32,25 +32,13 @@
 
             <TextView
                 android:id="@+id/recipe_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                tools:text="Recipe Name" />
+                tools:text="Recipe Name"
+                style="@style/recipe_name" />
 
             <TextView
                 android:id="@+id/recipe_servings"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                tools:text="Number of servings: 10" />
+                tools:text="Number of servings: 10"
+                style="@style/recipe_serving" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </layout>
