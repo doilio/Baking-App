@@ -30,7 +30,6 @@ public class RecipeDetailActivity extends AppCompatActivity implements StepsAdap
     public static final String NAME = "name";
     public static String NAME_TEXT;
     private ActivityRecipeDetailBinding binding;
-    private Recipe recipe;
     private List<Step> stepsList = new ArrayList<>();
     private StepsAdapter adapter;
 
@@ -43,7 +42,7 @@ public class RecipeDetailActivity extends AppCompatActivity implements StepsAdap
 
         Intent i = getIntent();
         if (i.getSerializableExtra(RECIPE) != null) {
-            recipe = (Recipe) i.getSerializableExtra(RECIPE);
+            Recipe recipe = (Recipe) i.getSerializableExtra(RECIPE);
 
             populateUI(recipe);
 
@@ -51,8 +50,6 @@ public class RecipeDetailActivity extends AppCompatActivity implements StepsAdap
             // Force Close
             finish();
         }
-
-
     }
 
     private void initComponents() {
@@ -114,7 +111,6 @@ public class RecipeDetailActivity extends AppCompatActivity implements StepsAdap
     /**
      * Provides a smooth experience when navigating Up.
      * Not Querying Again
-     * @return
      */
     @Override
     public boolean onSupportNavigateUp() {
