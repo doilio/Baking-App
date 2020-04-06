@@ -29,11 +29,14 @@ public class RecipeDetailActivity extends AppCompatActivity implements StepsAdap
     private static final String TAG = RecipeDetailActivity.class.getSimpleName();
     public static final String STEP = "step";
     public static final String NAME = "name";
+    public static final String MY_RECIPE = "recipe";
+    public static final String INDEX = "index";
     public static String NAME_TEXT;
     private ActivityRecipeDetailBinding binding;
     private List<Step> stepsList = new ArrayList<>();
     private StepsAdapter adapter;
     private boolean mTwoPane = false;
+    private Recipe myRecipe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +76,7 @@ public class RecipeDetailActivity extends AppCompatActivity implements StepsAdap
 
         if (recipe != null) {
 
+            myRecipe = recipe;
             // Setting up the list of steps
             stepsList = recipe.getSteps();
 
@@ -110,7 +114,8 @@ public class RecipeDetailActivity extends AppCompatActivity implements StepsAdap
      */
     @Override
     public boolean onSupportNavigateUp() {
-        onBackPressed();
+        //onBackPressed();
+        finish();
         return false;
     }
 
@@ -125,11 +130,20 @@ public class RecipeDetailActivity extends AppCompatActivity implements StepsAdap
                     .addToBackStack(null)
                     .commit();
         } else {
-            Step step = stepsList.get(position);
+            //int listSize = stepsList.size();
+            Intent i = new Intent(this, StepDetailActivity.class);
+            i.putExtra(MY_RECIPE, myRecipe);
+            i.putExtra(INDEX,position);
+            i.putExtra(NAME, NAME_TEXT);
+            startActivity(i);
+
+
+
+/*            Step step = stepsList.get(position);
             Intent i = new Intent(this, StepDetailActivity.class);
             i.putExtra(STEP, step);
             i.putExtra(NAME, NAME_TEXT);
-            startActivity(i);
+            startActivity(i);*/
         }
 
     }

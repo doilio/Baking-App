@@ -31,27 +31,37 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/ingredients_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+            <ScrollView
+                android:id="@+id/scrollView2"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
+                android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ingredients_label"
-                tools:text="@string/ingredients_list"
-                style="@style/textSize" />
+                app:layout_constraintTop_toBottomOf="@+id/ingredients_label">
+
+                <TextView
+                    android:id="@+id/ingredients_text"
+                    style="@style/textSize"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="43dp"
+                    tools:text="@string/ingredients_list" />
+            </ScrollView>
+
+
 
             <TextView
                 android:id="@+id/step_label"
+                style="@style/label_text"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:text="@string/steps"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ingredients_text"
-                style="@style/label_text" />
+                app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_step"

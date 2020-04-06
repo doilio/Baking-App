@@ -15,7 +15,7 @@
         <FrameLayout
             android:id="@+id/step_detail_container"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             app:layout_constraintBottom_toTopOf="@+id/button_previous"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -26,6 +26,7 @@
         </FrameLayout>
 
         <Button
+            android:visibility="gone"
             android:id="@+id/button_previous"
             style="@style/nav_button"
             android:layout_marginStart="8dp"
@@ -37,6 +38,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
+            android:visibility="gone"
             android:id="@+id/button_next"
             style="@style/nav_button"
             android:layout_marginEnd="8dp"
@@ -47,6 +49,7 @@
             app:layout_constraintStart_toEndOf="@+id/page_guide" />
 
         <TextView
+            android:visibility="gone"
             android:id="@+id/page_guide"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
