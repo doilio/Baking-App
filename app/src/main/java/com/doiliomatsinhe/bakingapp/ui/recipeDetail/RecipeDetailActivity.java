@@ -16,6 +16,7 @@ import com.doiliomatsinhe.bakingapp.model.Ingredient;
 import com.doiliomatsinhe.bakingapp.model.Recipe;
 import com.doiliomatsinhe.bakingapp.model.Step;
 import com.doiliomatsinhe.bakingapp.ui.stepDetail.StepDetailActivity;
+import com.doiliomatsinhe.bakingapp.ui.stepDetail.StepDetailFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +33,7 @@ public class RecipeDetailActivity extends AppCompatActivity implements StepsAdap
     private ActivityRecipeDetailBinding binding;
     private List<Step> stepsList = new ArrayList<>();
     private StepsAdapter adapter;
+    private boolean mTwoPane = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +63,10 @@ public class RecipeDetailActivity extends AppCompatActivity implements StepsAdap
         binding.recyclerStep.setHasFixedSize(true);
         binding.recyclerStep.setAdapter(adapter);
         binding.recyclerStep.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+
+        if (binding.stepDetailContainer != null) {
+            mTwoPane = true;
+        }
     }
 
     private void populateUI(Recipe recipe) {
@@ -84,13 +90,13 @@ public class RecipeDetailActivity extends AppCompatActivity implements StepsAdap
 
                 String text;
                 int gridColumnCount = getResources().getInteger(R.integer.grid_column_count);
-                if (gridColumnCount == 3){
+                if (gridColumnCount == 3) {
                     if (quantity % 1 == 0) {
                         text = String.format("%s %s of %s, ", (int) quantity, unit, name);
                     } else {
                         text = String.format("%s %s of %s, ", quantity, unit, name);
                     }
-                }else {
+                } else {
                     if (quantity % 1 == 0) {
                         text = String.format("* %s %s of %s\n", (int) quantity, unit, name);
                     } else {
@@ -120,11 +126,21 @@ public class RecipeDetailActivity extends AppCompatActivity implements StepsAdap
 
     @Override
     public void onStepsItemClick(int position) {
-        Step step = stepsList.get(position);
-        Intent i = new Intent(this, StepDetailActivity.class);
-        i.putExtra(STEP, step);
-        i.putExtra(NAME, NAME_TEXT);
-        startActivity(i);
+
+        if (mTwoPane) {
+            Step selectedStep = stepsList.get(position);
+            StepDetailFragment fragment = StepDetailFragment.newInstance(selectedStep);
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.step_detail_container, fragment)
+                    .addToBackStack(null)
+                    .commit();
+        } else {
+            Step step = stepsList.get(position);
+            Intent i = new Intent(this, StepDetailActivity.class);
+            i.putExtra(STEP, step);
+            i.putExtra(NAME, NAME_TEXT);
+            startActivity(i);
+        }
 
     }
 }

@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.stepDetail.StepDetailActivity"></activity>
+        <activity android:name=".ui.stepDetail.StepDetailActivity"
+            android:parentActivityName=".ui.stepDetail.StepDetailActivity"/>
         <activity
             android:name=".ui.recipeDetail.RecipeDetailActivity"
             android:parentActivityName=".ui.recipe.RecipeActivity" />
