@@ -118,11 +118,11 @@ public class StepDetailFragment extends Fragment {
     private void initializePlayer() {
 
         //int gridColumnCount = getResources().getInteger(R.integer.grid_column_count);
-        int orientation = getResources().getConfiguration().orientation;
-        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            // In landscape
-            hideSystemUi();
-        }
+//        int orientation = getResources().getConfiguration().orientation;
+//        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+//            // In landscape
+//            hideSystemUi();
+//        }
         player = ExoPlayerFactory.newSimpleInstance(Objects.requireNonNull(getActivity()));
         binding.videoView.setPlayer(player);
 

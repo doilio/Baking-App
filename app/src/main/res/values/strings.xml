@@ -3,8 +3,8 @@
     <string name="recipe_image">Recipe Image</string>
     <string name="ingredients_label">Ingredients</string>
     <string name="ingredients_list">* 2 CUP of Graham Cracker crumbs\n* 6 TBLSP of unsalted butter, melted\n* 0.5 CUP of granulated sugar\n* 1.5 TSP of salt\n* 5 TBLSP of vanilla\n* 1 K of Nutella or other chocolate-hazelnut spread\n* 500 G of Mascapone Cheese(room temperature)\n* 1 CUP of heavy cream(cold)\n* 4 OZ of cream cheese(softened)</string>
-    <string name="ingredients_list2"></string>
-    <string name="steps">Steps</string>
+
+    <string name="steps">List of steps</string>
     <string name="description">Description</string>
     <string name="step_description_text">2. Whisk the graham cracker crumbs, 50 grams (1/4 cup) of sugar, and 1/2 teaspoon of salt together in a medium bowl. Pour the melted butter and 1 teaspoon of vanilla into the dry ingredients and stir together until evenly mixed.</string>
     <string name="previous">Previous</string>
@@ -12,6 +12,5 @@
     <string name="video_not_found">Video Not Found</string>
     <string name="intro">Intro</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

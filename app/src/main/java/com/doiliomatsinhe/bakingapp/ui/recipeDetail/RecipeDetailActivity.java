@@ -89,21 +89,11 @@ public class RecipeDetailActivity extends AppCompatActivity implements StepsAdap
                 float quantity = ingredient.getQuantity();
 
                 String text;
-                int gridColumnCount = getResources().getInteger(R.integer.grid_column_count);
-                if (gridColumnCount == 3) {
-                    if (quantity % 1 == 0) {
-                        text = String.format("%s %s of %s, ", (int) quantity, unit, name);
-                    } else {
-                        text = String.format("%s %s of %s, ", quantity, unit, name);
-                    }
+                if (quantity % 1 == 0) {
+                    text = String.format("* %s %s of %s;\n", (int) quantity, unit, name);
                 } else {
-                    if (quantity % 1 == 0) {
-                        text = String.format("* %s %s of %s\n", (int) quantity, unit, name);
-                    } else {
-                        text = String.format("* %s %s of %s\n", quantity, unit, name);
-                    }
+                    text = String.format("* %s %s of %s;\n", quantity, unit, name);
                 }
-
 
                 stringBuilder.append(text);
             }
