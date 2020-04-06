@@ -6,6 +6,7 @@ import androidx.databinding.DataBindingUtil;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.doiliomatsinhe.bakingapp.R;
 import com.doiliomatsinhe.bakingapp.databinding.ActivityStepDetailBinding;
@@ -48,9 +49,7 @@ public class StepDetailActivity extends AppCompatActivity {
             }
         }
 
-
         if (savedInstanceState == null) {
-            //Step selectedStep = (Step) getIntent().getSerializableExtra(STEP);
             Step selectedStep = listOfSteps.get(listIndex);
             StepDetailFragment fragment = StepDetailFragment.newInstance(selectedStep);
             getSupportFragmentManager().beginTransaction()
@@ -58,14 +57,17 @@ public class StepDetailActivity extends AppCompatActivity {
                     .commit();
         }
 
+        initialConfig();
+        setButtonClicks();
+    }
+
+    private void initialConfig() {
         if (listIndex == 0) {
             binding.buttonPrevious.setVisibility(View.INVISIBLE);
         }
         if (listIndex == listOfSteps.size() - 1) {
             binding.buttonNext.setVisibility(View.INVISIBLE);
         }
-        binding.pageGuide.setText(String.format("%s/%s", listIndex, listOfSteps.size() - 1));
-        setButtonClicks();
     }
 
     private void inflateFragmentFromClick(List<Step> listOfSteps, int listIndex) {
@@ -83,7 +85,6 @@ public class StepDetailActivity extends AppCompatActivity {
 
             listIndex--;
             inflateFragmentFromClick(listOfSteps, listIndex);
-            binding.pageGuide.setText(String.format("%s/%s", listIndex, listOfSteps.size() - 1));
             binding.buttonNext.setVisibility(View.VISIBLE);
             if (listIndex == 0) {
                 binding.buttonPrevious.setVisibility(View.INVISIBLE);
@@ -95,7 +96,6 @@ public class StepDetailActivity extends AppCompatActivity {
         binding.buttonNext.setOnClickListener(v -> {
             listIndex++;
             inflateFragmentFromClick(listOfSteps, listIndex);
-            binding.pageGuide.setText(String.format("%s/%s", listIndex, listOfSteps.size() - 1));
             binding.buttonPrevious.setVisibility(View.VISIBLE);
             if (listIndex == listOfSteps.size() - 1) {
                 binding.buttonNext.setVisibility(View.INVISIBLE);
