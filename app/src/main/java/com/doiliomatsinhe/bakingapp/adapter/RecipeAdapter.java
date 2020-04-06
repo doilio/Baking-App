@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.doiliomatsinhe.bakingapp.R;
 import com.doiliomatsinhe.bakingapp.databinding.RecipeItemBinding;
 import com.doiliomatsinhe.bakingapp.model.Recipe;
 import com.squareup.picasso.Picasso;
@@ -34,8 +35,10 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
 
         void bind(Recipe item) {
 
-            if (!item.getImage().isEmpty()){
+            if (!item.getImage().isEmpty()) {
                 Picasso.get().load(item.getImage()).into(binding.recipeImage);
+            } else {
+                binding.recipeImage.setImageResource(R.drawable.baking);
             }
             binding.recipeName.setText(item.getName());
             binding.recipeServings.setText(String.format("Number of servings: %s", item.getServings()));
