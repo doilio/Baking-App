@@ -24,13 +24,12 @@ public class IngredientWidgetService extends RemoteViewsService {
 
     class IngredientWidgetItemFactory implements RemoteViewsFactory {
         private Context context;
-        private int appWidgetId;
         private Recipe recipe;
         private String listOfIngredients;
 
         IngredientWidgetItemFactory(Context context, Intent intent) {
             this.context = context;
-            this.appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID);
+            int appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID);
         }
 
         @Override
@@ -58,6 +57,7 @@ public class IngredientWidgetService extends RemoteViewsService {
 
         @Override
         public RemoteViews getViewAt(int position) {
+            // if the recipe isn't null data is set on the widget's views
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.ingredients_widget_item);
             if (recipe != null){
                 views.setTextViewText(R.id.my_widget_title, recipe.getName());

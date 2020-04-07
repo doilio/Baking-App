@@ -1,8 +1,5 @@
 package com.doiliomatsinhe.bakingapp.ui.stepDetail;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -14,10 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.doiliomatsinhe.bakingapp.R;
-import com.doiliomatsinhe.bakingapp.databinding.ActivityStepDetailBinding;
 import com.doiliomatsinhe.bakingapp.databinding.FragmentStepDetailBinding;
 import com.doiliomatsinhe.bakingapp.model.Step;
 import com.google.android.exoplayer2.ExoPlayerFactory;
@@ -28,10 +22,10 @@ import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Objects;
 
-import static com.doiliomatsinhe.bakingapp.ui.recipeDetail.RecipeDetailActivity.NAME;
-import static com.doiliomatsinhe.bakingapp.ui.recipeDetail.RecipeDetailActivity.STEP;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -40,12 +34,13 @@ public class StepDetailFragment extends Fragment {
     private FragmentStepDetailBinding binding;
     private SimpleExoPlayer player;
     private static final String TAG = StepDetailFragment.class.getSimpleName();
-    // Exoplayer Members
+
     private boolean playWhenReady = true;
     private int currentWindow = 0;
     private long playbackPosition = 0;
-    String videoUrl = null;
+    private String videoUrl = null;
     private Step step;
+    private static final String STEP = "step";
 
     public StepDetailFragment() {
         // Required empty public constructor
@@ -57,7 +52,9 @@ public class StepDetailFragment extends Fragment {
         if (getArguments() != null) {
             if (getArguments().getSerializable(STEP) != null) {
                 step = (Step) getArguments().getSerializable(STEP);
-                Log.d(TAG, "STEP is not null" + step.getShortDescription());
+                if (step != null) {
+                    Log.d(TAG, "STEP is not null" + step.getShortDescription());
+                }
 
             } else {
                 Log.d(TAG, "STEP is null");
@@ -70,7 +67,7 @@ public class StepDetailFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentStepDetailBinding.inflate(inflater, container, false);
@@ -79,6 +76,9 @@ public class StepDetailFragment extends Fragment {
         return binding.getRoot();
     }
 
+    /**
+     * StepDetailFragment factory
+     */
     public static StepDetailFragment newInstance(Step selectedStep) {
         StepDetailFragment fragment = new StepDetailFragment();
         // bundle arguments for the fragment
@@ -95,6 +95,9 @@ public class StepDetailFragment extends Fragment {
         populateUI(step);
     }
 
+    /**
+     * Populates the UI when this fragment is created
+     */
     private void populateUI(Step step) {
         if (step != null) {
 
@@ -110,19 +113,18 @@ public class StepDetailFragment extends Fragment {
         }
     }
 
+    /**
+     * Exoplayer Method to build a Media Source
+     */
     private MediaSource buildMediaSource(Uri uri) {
         DataSource.Factory dataSourceFactory = new DefaultDataSourceFactory(Objects.requireNonNull(getActivity()), "baking-app");
         return new ProgressiveMediaSource.Factory(dataSourceFactory).createMediaSource(uri);
     }
 
+    /**
+     * Exoplayer player initialization
+     */
     private void initializePlayer() {
-
-        //int gridColumnCount = getResources().getInteger(R.integer.grid_column_count);
-//        int orientation = getResources().getConfiguration().orientation;
-//        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-//            // In landscape
-//            hideSystemUi();
-//        }
         player = ExoPlayerFactory.newSimpleInstance(Objects.requireNonNull(getActivity()));
         binding.videoView.setPlayer(player);
 
@@ -171,17 +173,9 @@ public class StepDetailFragment extends Fragment {
         }
     }
 
-
-    @SuppressLint("InlinedApi")
-    private void hideSystemUi() {
-        binding.videoView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE
-                | View.SYSTEM_UI_FLAG_FULLSCREEN
-                | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
-    }
-
+    /**
+     * Exoplayer releases the player when done
+     */
     private void releasePlayer() {
         if (player != null) {
             playWhenReady = player.getPlayWhenReady();

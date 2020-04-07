@@ -39,14 +39,6 @@ public class RecipeActivityTest {
     }
 
     /**
-     * Checks if the list exists
-     */
-    @Test
-    public void checkListExists() {
-        onView(withId(R.id.recycler_recipe)).check(matches(isDisplayed()));
-    }
-
-    /**
      * Clicks on the Items in the RecyclerView
      */
     @Test

@@ -10,10 +10,8 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.RemoteViews;
 
 import com.doiliomatsinhe.bakingapp.R;
 import com.doiliomatsinhe.bakingapp.adapter.StepsAdapter;
@@ -23,7 +21,6 @@ import com.doiliomatsinhe.bakingapp.model.Recipe;
 import com.doiliomatsinhe.bakingapp.model.Step;
 import com.doiliomatsinhe.bakingapp.ui.stepDetail.StepDetailActivity;
 import com.doiliomatsinhe.bakingapp.ui.stepDetail.StepDetailFragment;
-import com.doiliomatsinhe.bakingapp.widget.IngredientWidgetService;
 import com.doiliomatsinhe.bakingapp.widget.IngredientsWidget;
 
 import java.util.ArrayList;
@@ -36,7 +33,6 @@ import static com.doiliomatsinhe.bakingapp.ui.recipe.RecipeActivity.RECIPE_PREF;
 public class RecipeDetailActivity extends AppCompatActivity implements StepsAdapter.StepsItemClickListener {
 
     private static final String TAG = RecipeDetailActivity.class.getSimpleName();
-    public static final String STEP = "step";
     public static final String NAME = "name";
     public static final String MY_RECIPE = "recipe";
     public static final String INDEX = "index";

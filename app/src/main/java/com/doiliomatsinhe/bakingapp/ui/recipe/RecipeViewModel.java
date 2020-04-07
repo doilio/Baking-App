@@ -9,6 +9,8 @@ import androidx.lifecycle.ViewModel;
 import com.doiliomatsinhe.bakingapp.data.BakingRepository;
 import com.doiliomatsinhe.bakingapp.model.Recipe;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 import retrofit2.Call;
@@ -25,11 +27,15 @@ public class RecipeViewModel extends ViewModel {
         this.repository = repository;
     }
 
+    /**
+     * Asynchronous Call to the 'baking.json' endpoint to retrieve a JSON file
+     * @return a list of recipes
+     */
     public LiveData<List<Recipe>> getRecipes() {
 
         repository.getRecipes().enqueue(new Callback<List<Recipe>>() {
             @Override
-            public void onResponse(Call<List<Recipe>> call, Response<List<Recipe>> response) {
+            public void onResponse(@NotNull Call<List<Recipe>> call, @NotNull Response<List<Recipe>> response) {
                 if (response.body() != null) {
                     List<Recipe> recipeList = response.body();
 
@@ -40,7 +46,7 @@ public class RecipeViewModel extends ViewModel {
             }
 
             @Override
-            public void onFailure(Call<List<Recipe>> call, Throwable t) {
+            public void onFailure(@NotNull Call<List<Recipe>> call, Throwable t) {
                 Log.d(TAG, "Error : " + t.getMessage());
             }
         });

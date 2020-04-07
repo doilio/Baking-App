@@ -1,17 +1,12 @@
 package com.doiliomatsinhe.bakingapp.ui.recipe;
 
-import androidx.annotation.Nullable;
-import androidx.annotation.VisibleForTesting;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-import androidx.test.espresso.IdlingResource;
-import androidx.test.espresso.idling.CountingIdlingResource;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -39,9 +34,6 @@ public class RecipeActivity extends AppCompatActivity implements SwipeRefreshLay
     public static final String RECIPE_PREF = "recipe_pref";
     public static final String MY_RECIPE = "my_recipe";
 
-    @Nullable
-    private CountingIdlingResource idlingResource;
-
     private List<Recipe> recipeList = new ArrayList<>();
     private static final String TAG = RecipeActivity.class.getSimpleName();
 
@@ -56,25 +48,28 @@ public class RecipeActivity extends AppCompatActivity implements SwipeRefreshLay
 
     }
 
+    /**
+     * Populates the adapter with the recipe list
+     */
     private void fetchRecipeList() {
         EspressoUtils.increment(); // For testing
         binding.swipeRefreshRecipe.setRefreshing(true);
-        viewModel.getRecipes().observe(this, new Observer<List<Recipe>>() {
-            @Override
-            public void onChanged(List<Recipe> recipes) {
-                Log.d(TAG, "Size of List: " + recipes.size());
-                Log.d(TAG, "Name of 1st recipe: " + recipes.get(0).getName());
+        viewModel.getRecipes().observe(this, recipes -> {
+            Log.d(TAG, "Size of List: " + recipes.size());
+            Log.d(TAG, "Name of 1st recipe: " + recipes.get(0).getName());
 
-                adapter.setRecipeList(recipes);
-                EspressoUtils.decrement(); // For testing
-                recipeList = recipes;
-                binding.swipeRefreshRecipe.setRefreshing(false);
-            }
+            adapter.setRecipeList(recipes);
+            EspressoUtils.decrement(); // For testing
+            recipeList = recipes;
+            binding.swipeRefreshRecipe.setRefreshing(false);
         });
 
 
     }
 
+    /**
+     * Initialization of components
+     */
     private void initComponents() {
 
         // Swipe Refresh
@@ -113,6 +108,11 @@ public class RecipeActivity extends AppCompatActivity implements SwipeRefreshLay
         startActivity(i);
     }
 
+    /**
+     * Saves the current recipe to shared Preferences, then this is used to update the widget
+     *
+     * @param myRecipe current clicked recipe
+     */
     private void saveToSharedPreferences(String myRecipe) {
         clearSharedPref();
         SharedPreferences sharedPref = getSharedPreferences(RECIPE_PREF, MODE_PRIVATE);
@@ -123,6 +123,9 @@ public class RecipeActivity extends AppCompatActivity implements SwipeRefreshLay
         Log.d(TAG, "Shared Pref saved");
     }
 
+    /**
+     * Clears the SharedPreferences File if not null
+     */
     private void clearSharedPref() {
         SharedPreferences sharedPref = getSharedPreferences(RECIPE_PREF, MODE_PRIVATE);
 

@@ -6,7 +6,6 @@ import androidx.databinding.DataBindingUtil;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import com.doiliomatsinhe.bakingapp.R;
 import com.doiliomatsinhe.bakingapp.databinding.ActivityStepDetailBinding;
@@ -61,6 +60,9 @@ public class StepDetailActivity extends AppCompatActivity {
         setButtonClicks();
     }
 
+    /**
+     * Takes care of the buttons visibility according to it's position.
+     */
     private void initialConfig() {
         if (listIndex == 0) {
             binding.buttonPrevious.setVisibility(View.INVISIBLE);
@@ -70,6 +72,9 @@ public class StepDetailActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Inflates fragment according to Navigation
+     */
     private void inflateFragmentFromClick(List<Step> listOfSteps, int listIndex) {
         Step selectedStep = listOfSteps.get(listIndex);
         StepDetailFragment fragment = StepDetailFragment.newInstance(selectedStep);
@@ -79,6 +84,9 @@ public class StepDetailActivity extends AppCompatActivity {
                 .commit();
     }
 
+    /**
+     * Handles Navigations with buttons and inflates the fragment dynamically
+     */
     private void setButtonClicks() {
 
         binding.buttonPrevious.setOnClickListener(v -> {
