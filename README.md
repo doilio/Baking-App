@@ -29,7 +29,7 @@ Through this project, you will:
 ![device-2020-04-07-173234](https://user-images.githubusercontent.com/38020305/78695410-587f8580-78fe-11ea-83e7-a324c0f6ee38.png)
 ![device-2020-04-07-173903](https://user-images.githubusercontent.com/38020305/78695414-59181c00-78fe-11ea-85dd-eeecd17d7d3d.png)
 
-## Tablet Layout (Portrait and Landscape)
+## Tablet Layout (Landscape)
 ![device-2020-04-07-174456](https://user-images.githubusercontent.com/38020305/78695422-5c130c80-78fe-11ea-8830-b81c40013148.png)
 ![device-2020-04-07-174612](https://user-images.githubusercontent.com/38020305/78695429-5fa69380-78fe-11ea-8b2a-a93c9beb7a37.png)
 
