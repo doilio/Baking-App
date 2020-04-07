@@ -33,4 +33,7 @@ Through this project, you will:
 ![device-2020-04-07-174456](https://user-images.githubusercontent.com/38020305/78695422-5c130c80-78fe-11ea-8830-b81c40013148.png)
 ![device-2020-04-07-174612](https://user-images.githubusercontent.com/38020305/78695429-5fa69380-78fe-11ea-8b2a-a93c9beb7a37.png)
 
+## Widget Update
+Home Screen Widget is updated on the with the latest Recipe clicked.
+![baking](https://user-images.githubusercontent.com/38020305/78699879-e494ab80-7904-11ea-84e6-69937ee8cf27.gif)
 
