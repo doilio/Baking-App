@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -18,6 +19,7 @@ import com.doiliomatsinhe.bakingapp.data.BakingRepository;
 import com.doiliomatsinhe.bakingapp.databinding.ActivityRecipeBinding;
 import com.doiliomatsinhe.bakingapp.model.Recipe;
 import com.doiliomatsinhe.bakingapp.ui.recipeDetail.RecipeDetailActivity;
+import com.doiliomatsinhe.bakingapp.util.JsonUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +30,8 @@ public class RecipeActivity extends AppCompatActivity implements SwipeRefreshLay
     private RecipeViewModel viewModel;
     private RecipeAdapter adapter;
     public static final String RECIPE = "recipe";
+    public static final String RECIPE_PREF = "recipe_pref";
+    public static final String MY_RECIPE = "my_recipe";
 
     private List<Recipe> recipeList = new ArrayList<>();
     private static final String TAG = RecipeActivity.class.getSimpleName();
@@ -73,7 +77,7 @@ public class RecipeActivity extends AppCompatActivity implements SwipeRefreshLay
         // Adapter
         int gridColumnCount = getResources().getInteger(R.integer.grid_column_count);
         adapter = new RecipeAdapter(this);
-        LinearLayoutManager layoutManager = new GridLayoutManager(this,gridColumnCount);
+        LinearLayoutManager layoutManager = new GridLayoutManager(this, gridColumnCount);
         binding.recyclerRecipe.setLayoutManager(layoutManager);
         binding.recyclerRecipe.setHasFixedSize(true);
         binding.recyclerRecipe.setAdapter(adapter);
@@ -87,8 +91,39 @@ public class RecipeActivity extends AppCompatActivity implements SwipeRefreshLay
     @Override
     public void onRecipeItemClick(int position) {
         Recipe recipe = recipeList.get(position);
+
+        //Save the last clicked recipe as a JSON file for the Widget
+        String myRecipe = JsonUtil.getJsonFromObject(recipe);
+        Log.d(TAG, "My recipe" + myRecipe);
+        saveToSharedPreferences(myRecipe);
+
         Intent i = new Intent(this, RecipeDetailActivity.class);
         i.putExtra(RECIPE, recipe);
         startActivity(i);
     }
+
+    private void saveToSharedPreferences(String myRecipe) {
+        clearSharedPref();
+        SharedPreferences sharedPref = getSharedPreferences(RECIPE_PREF, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(MY_RECIPE, myRecipe);
+
+        editor.apply();
+        Log.d(TAG, "Shared Pref saved");
+    }
+
+    private void clearSharedPref() {
+        SharedPreferences sharedPref = getSharedPreferences(RECIPE_PREF, MODE_PRIVATE);
+
+        if (sharedPref != null) {
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.clear();
+            editor.apply();
+            Log.d(TAG, "Shared Pref cleared");
+        } else {
+            Log.d(TAG, "Shared Pref is currently null");
+        }
+    }
+
+
 }

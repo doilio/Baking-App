@@ -12,8 +12,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.stepDetail.StepDetailActivity"
-            android:parentActivityName=".ui.stepDetail.StepDetailActivity"/>
+        <receiver android:name=".widget.IngredientsWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/ingredients_widget_info" />
+        </receiver>
+
+        <activity
+            android:name=".ui.stepDetail.StepDetailActivity"
+            android:parentActivityName=".ui.stepDetail.StepDetailActivity" />
         <activity
             android:name=".ui.recipeDetail.RecipeDetailActivity"
             android:parentActivityName=".ui.recipe.RecipeActivity" />
@@ -24,6 +35,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service android:name=".widget.IngredientWidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS"/>
     </application>
 
 </manifest>

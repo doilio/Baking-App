@@ -5,9 +5,15 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.RemoteViews;
 
 import com.doiliomatsinhe.bakingapp.R;
 import com.doiliomatsinhe.bakingapp.adapter.StepsAdapter;
@@ -17,12 +23,15 @@ import com.doiliomatsinhe.bakingapp.model.Recipe;
 import com.doiliomatsinhe.bakingapp.model.Step;
 import com.doiliomatsinhe.bakingapp.ui.stepDetail.StepDetailActivity;
 import com.doiliomatsinhe.bakingapp.ui.stepDetail.StepDetailFragment;
+import com.doiliomatsinhe.bakingapp.widget.IngredientWidgetService;
+import com.doiliomatsinhe.bakingapp.widget.IngredientsWidget;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 import static com.doiliomatsinhe.bakingapp.ui.recipe.RecipeActivity.RECIPE;
+import static com.doiliomatsinhe.bakingapp.ui.recipe.RecipeActivity.RECIPE_PREF;
 
 public class RecipeDetailActivity extends AppCompatActivity implements StepsAdapter.StepsItemClickListener {
 
@@ -32,6 +41,7 @@ public class RecipeDetailActivity extends AppCompatActivity implements StepsAdap
     public static final String MY_RECIPE = "recipe";
     public static final String INDEX = "index";
     public static String NAME_TEXT;
+    public static String MY_INGREDIENTS = "my_ingredients";
     private ActivityRecipeDetailBinding binding;
     private List<Step> stepsList = new ArrayList<>();
     private StepsAdapter adapter;
@@ -103,9 +113,28 @@ public class RecipeDetailActivity extends AppCompatActivity implements StepsAdap
             }
 
             String finalString = stringBuilder.toString().trim();
+
+            saveToSharedPref(finalString);
+
             binding.ingredientsText.setText(finalString);
             Log.d(TAG, "Texto: \n" + finalString);
         }
+    }
+
+    private void saveToSharedPref(String listOfIngredients) {
+        SharedPreferences sharedPref = getSharedPreferences(RECIPE_PREF, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(MY_INGREDIENTS, listOfIngredients);
+        editor.apply();
+        Log.d(TAG, "List of Ingredients saved");
+
+
+        // Updates the Widget
+        Context context = getApplicationContext();
+        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+        ComponentName thisWidget = new ComponentName(context, IngredientsWidget.class);
+        int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisWidget);
+        appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.ingredients_widget_stack);
     }
 
     /**
@@ -114,7 +143,6 @@ public class RecipeDetailActivity extends AppCompatActivity implements StepsAdap
      */
     @Override
     public boolean onSupportNavigateUp() {
-        //onBackPressed();
         finish();
         return false;
     }
@@ -130,20 +158,12 @@ public class RecipeDetailActivity extends AppCompatActivity implements StepsAdap
                     .addToBackStack(null)
                     .commit();
         } else {
-            //int listSize = stepsList.size();
             Intent i = new Intent(this, StepDetailActivity.class);
             i.putExtra(MY_RECIPE, myRecipe);
-            i.putExtra(INDEX,position);
+            i.putExtra(INDEX, position);
             i.putExtra(NAME, NAME_TEXT);
             startActivity(i);
 
-
-
-/*            Step step = stepsList.get(position);
-            Intent i = new Intent(this, StepDetailActivity.class);
-            i.putExtra(STEP, step);
-            i.putExtra(NAME, NAME_TEXT);
-            startActivity(i);*/
         }
 
     }
