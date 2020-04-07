@@ -1,6 +1,7 @@
 package com.doiliomatsinhe.bakingapp.ui.recipe;
 
 
+import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
@@ -59,12 +60,11 @@ public class RecipeActivity extends AppCompatActivity implements SwipeRefreshLay
             Log.d(TAG, "Name of 1st recipe: " + recipes.get(0).getName());
 
             adapter.setRecipeList(recipes);
-            EspressoUtils.decrement(); // For testing
+
             recipeList = recipes;
             binding.swipeRefreshRecipe.setRefreshing(false);
         });
-
-
+        EspressoUtils.decrement();
     }
 
     /**

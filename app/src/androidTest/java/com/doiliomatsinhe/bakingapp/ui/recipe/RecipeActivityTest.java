@@ -4,6 +4,7 @@ import androidx.test.espresso.Espresso;
 import androidx.test.espresso.IdlingRegistry;
 import androidx.test.espresso.IdlingResource;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 
 import com.doiliomatsinhe.bakingapp.R;
@@ -11,9 +12,11 @@ import com.doiliomatsinhe.bakingapp.util.EspressoUtils;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 
 
 import static androidx.test.espresso.Espresso.onView;
@@ -23,8 +26,8 @@ import static androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtP
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 
-
 @RunWith(AndroidJUnit4.class)
+@LargeTest
 public class RecipeActivityTest {
 
     @Rule
@@ -42,7 +45,7 @@ public class RecipeActivityTest {
      * Clicks on the Items in the RecyclerView
      */
     @Test
-    public void iterateRecyclerViewItems() {
+    public void a_erateRecyclerViewItems() {
         for (int i = 0; i < 4; i++) {
             onView(withId(R.id.recycler_recipe)).perform(actionOnItemAtPosition(i, click()));
             Espresso.pressBack();
