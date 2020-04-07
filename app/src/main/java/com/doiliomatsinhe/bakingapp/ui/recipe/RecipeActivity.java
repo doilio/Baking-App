@@ -1,5 +1,8 @@
 package com.doiliomatsinhe.bakingapp.ui.recipe;
 
+import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
@@ -7,6 +10,8 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.test.espresso.IdlingResource;
+import androidx.test.espresso.idling.CountingIdlingResource;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -19,6 +24,7 @@ import com.doiliomatsinhe.bakingapp.data.BakingRepository;
 import com.doiliomatsinhe.bakingapp.databinding.ActivityRecipeBinding;
 import com.doiliomatsinhe.bakingapp.model.Recipe;
 import com.doiliomatsinhe.bakingapp.ui.recipeDetail.RecipeDetailActivity;
+import com.doiliomatsinhe.bakingapp.util.EspressoUtils;
 import com.doiliomatsinhe.bakingapp.util.JsonUtil;
 
 import java.util.ArrayList;
@@ -32,6 +38,9 @@ public class RecipeActivity extends AppCompatActivity implements SwipeRefreshLay
     public static final String RECIPE = "recipe";
     public static final String RECIPE_PREF = "recipe_pref";
     public static final String MY_RECIPE = "my_recipe";
+
+    @Nullable
+    private CountingIdlingResource idlingResource;
 
     private List<Recipe> recipeList = new ArrayList<>();
     private static final String TAG = RecipeActivity.class.getSimpleName();
@@ -48,6 +57,7 @@ public class RecipeActivity extends AppCompatActivity implements SwipeRefreshLay
     }
 
     private void fetchRecipeList() {
+        EspressoUtils.increment(); // For testing
         binding.swipeRefreshRecipe.setRefreshing(true);
         viewModel.getRecipes().observe(this, new Observer<List<Recipe>>() {
             @Override
@@ -56,6 +66,7 @@ public class RecipeActivity extends AppCompatActivity implements SwipeRefreshLay
                 Log.d(TAG, "Name of 1st recipe: " + recipes.get(0).getName());
 
                 adapter.setRecipeList(recipes);
+                EspressoUtils.decrement(); // For testing
                 recipeList = recipes;
                 binding.swipeRefreshRecipe.setRefreshing(false);
             }
