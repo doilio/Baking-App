@@ -35,5 +35,7 @@ Through this project, you will:
 
 ## Widget Update
 Home Screen Widget is updated on the with the latest Recipe clicked.
+
+
 ![baking](https://user-images.githubusercontent.com/38020305/78699879-e494ab80-7904-11ea-84e6-69937ee8cf27.gif)
 
